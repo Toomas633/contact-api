@@ -9,8 +9,8 @@ Lepitakse kokku järgnevas:
 
 Kliendi nõuded:
 
-- [ ] Näeb kontaktide kirjeid.
-- [ ] Saab lisada uusi kontakti kirjeid.
+- [X] Näeb kontaktide kirjeid.
+- [X] Saab lisada uusi kontakti kirjeid.
 - [X] Kontakti kirjes talletatakse kontakti pärisnimi, salajane kood-nimi ja telefoninumber.
 - [ ] Lahendust saab kasutada läbi veebibrauseri.
 
@@ -19,7 +19,7 @@ Tehnilised nõuded:
 - [X] Infosüsteemil peab olema REST API, mis toetab JSON andmeformaati, et lahendust saaks liidestada teiste süsteemidega.
 - [X] Back-end tehnoloogia soovituslikult Java.
 - [ ] JavaScript kasutajaliides, mis suhtleb infosüsteemi REST API'ga kirjete lisamisel ja kuvamisel (ei pea mõtlema disaini või kujunduse peale).Võib kasutada ka oma valitud JavaScript raamistiku
-- [ ] Lahendus peab toetama kõikvõimalike sümbolitega kontaktide nimesid.
+- [X] Lahendus peab toetama kõikvõimalike sümbolitega kontaktide nimesid.
 - [X] Süsteemi kasutajad ja kontaktandmed on talletatud andmebaasis PostgreSQL.
 - [ ] Boonus: Kasutaja saab otsida kontakte
 
@@ -30,9 +30,13 @@ Lõpptulemus:
 
 ## Lahendus
 
-Json formaat `User{id=1, nimi=test, salajane=test, tel=52310232}`
-Url [http://.../kasutaja/{id}](http://.../kasutaja/{id}) kuvab vastava id-ga kasutaja kohta infot antud json formaadis.
-Url [http://.../lisa/{id=1, nimi=test, salajane=test, tel=52310232}](http://.../lisa/{id=1, nimi=test, salajane=test, tel=52310232}) salvestab selle info andmebaasi.
+Json formaat `{id=1, nimi=test, salajane=test, tel=52310232}`
+
+http://localhost:8000/api/1 kuvab vastava id-ga kasutaja kohta infot antud json formaadis.
+
+http://localhost:800/api/{id=1, nimi=test, salajane=test, tel=52310232} salvestab selle info andmebaasi.
+
+Andmebaasi dump: smit.sql
 
 ### Tarkvara
 

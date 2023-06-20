@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class App {
     public static void main(String[] args) throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
-        server.createContext("/", new UserHandler());
+        server.createContext("/api/", new UserHandler());
         server.setExecutor(null);
         server.start();
         System.out.println("Server started: http://localhost:8000");
@@ -32,17 +32,16 @@ public class App {
         }
 
         private void handleGetRequest(HttpExchange exchange) throws IOException {
-            String userId = exchange.getRequestURI().getPath().split("/kasutaja/")[1];
+            String userId = exchange.getRequestURI().getPath().split("/api/")[1];
             String url = "jdbc:postgresql://mysql.toomas633.com:5432/smit";
             String username = "postgres";
-            String password = "Toomas2001";
+            String password = "Testing1234";
             try (Connection connection = DriverManager.getConnection(url, username, password)) {
-                String selectQuery = "SELECT * FROM kasutajad WHERE id = ?";
+                String selectQuery = "SELECT * FROM kontaktid WHERE id = ?";
                 try (PreparedStatement statement = connection.prepareStatement(selectQuery)) {
                     statement.setInt(1, Integer.parseInt(userId));
                     try (ResultSet resultSet = statement.executeQuery()) {
                         if (resultSet.next()) {
-                            // Retrieve data from the result set
                             int id = resultSet.getInt("id");
                             String nimi = resultSet.getString("nimi");
                             String salajane = resultSet.getString("salajane");
@@ -55,6 +54,7 @@ public class App {
                         }
                     }
                 }
+                connection.close();
             } catch (SQLException e) {
                 sendResponse(exchange, 500, e.toString());
             }
@@ -62,9 +62,63 @@ public class App {
 
         private void handlePostRequest(HttpExchange exchange) throws IOException {
             String requestBody = new String(exchange.getRequestBody().readAllBytes());
-            System.out.print(requestBody);
-            // Logic to parse the request body and create a new user in the database
-            sendResponse(exchange, 201, "Kasutaja loodud");
+            System.out.println(requestBody);
+            String params = requestBody.substring(requestBody.indexOf('{') + 1, requestBody.indexOf('}'));
+            String[] keyValuePairs = params.split(",");
+            Integer id = 0;
+            String nimi = "", salajane = "", tel = "";
+            for (String pair : keyValuePairs) {
+                String[] parts = pair.trim().split("=");
+                String key = parts[0].trim();
+                String value = parts[1].trim();
+                if (key.equals("id")) {
+                    try {
+                        id = Integer.parseInt(value);
+                    } catch (Exception e) {
+                        System.out.println(e.toString());
+                    }
+                    
+                } else if (key.equals("nimi")) {
+                    nimi = value;
+                } else if (key.equals("salajane")) {
+                    salajane = value;
+                } else if (key.equals("tel")) {
+                    tel = value;
+                }
+            }
+            String url = "jdbc:postgresql://mysql.toomas633.com:5432/smit";
+            String username = "postgres";
+            String password = "Testing1234";
+            try (Connection connection = DriverManager.getConnection(url, username, password)) {
+                String insertQuery = "";
+                if (id.equals(0)) {
+                    insertQuery = "INSERT INTO kontaktid (nimi, salajane, tel) VALUES (?, ?, ?)";
+                    try (PreparedStatement statement = connection.prepareStatement(insertQuery)) {
+                        statement.setString(1, nimi);
+                        statement.setString(2, salajane);
+                        statement.setString(3, tel);
+                        statement.executeUpdate();
+                    } catch (SQLException e) {
+                        sendResponse(exchange, 500, e.toString());
+                    }
+                } else {
+                    insertQuery = "INSERT INTO kontaktid (id, nimi, salajane, tel) VALUES (?, ?, ?, ?) " +
+                    "ON CONFLICT (id) DO UPDATE SET nimi = EXCLUDED.nimi, salajane = EXCLUDED.salajane, tel = EXCLUDED.tel";
+                    try (PreparedStatement statement = connection.prepareStatement(insertQuery)) {
+                        statement.setInt(1, id);
+                        statement.setString(2, nimi);
+                        statement.setString(3, salajane);
+                        statement.setString(4, tel);
+                        statement.executeUpdate();
+                    } catch (SQLException e) {
+                        sendResponse(exchange, 500, e.toString());
+                    }
+                }
+                connection.close();
+                sendResponse(exchange, 200, "Andmebaas muudetud");
+            } catch (SQLException e) {
+                sendResponse(exchange, 500, e.toString());
+            }
         }
 
         private void sendResponse(HttpExchange exchange, int statusCode, String response) throws IOException {
