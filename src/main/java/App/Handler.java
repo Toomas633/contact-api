@@ -20,7 +20,7 @@ public class Handler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         String requestUri = exchange.getRequestURI().toString().trim();
-        if (requestUri.contains("?get=")) {
+        if (requestUri.contains("/get")) {
             GetContact(exchange);
         } else if (requestUri.equals("/add")) {
             AddContact(exchange);
