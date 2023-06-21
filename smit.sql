@@ -68,10 +68,12 @@ ALTER TABLE ONLY public.kontaktid ALTER COLUMN id SET DEFAULT nextval('public.ka
 --
 
 COPY public.kontaktid (id, nimi, salajane, tel) FROM stdin;
-1	Test	TEst	52102159
-2	Juss	Joonas	81244422
-3	test3	test3	81241222
-54	test54	test54	45241222
+1	Mart Laanemäe	Kivimurdja	55512345
+2	Liis Saar	Metslind	+372 55567890
+3	Jaanika Tamm	Salurüütel	+372 55524680
+4	Peeter Vaher	Öökull	55510101
+5	Mari-Liis Kask	Sinitihane	55588899
+6	Märten Põldmäe	Virmalaine	+37255598765
 \.
 
 
@@ -79,7 +81,7 @@ COPY public.kontaktid (id, nimi, salajane, tel) FROM stdin;
 -- Name: kasutajad_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.kasutajad_id_seq', 3, true);
+SELECT pg_catalog.setval('public.kasutajad_id_seq', 4, true);
 
 
 --

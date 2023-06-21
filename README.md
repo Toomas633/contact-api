@@ -40,7 +40,7 @@ http://localhost:800/api/{id=1, nimi=test, salajane=test, tel=52310232} salvesta
 
 Andmebaasi dump: `smit.sql`
 
-Ajakulu ~4h.
+Ajakulu ~5h.
 
 ### Tarkvara
 
@@ -51,11 +51,9 @@ Ajakulu ~4h.
 
 Aadress ja autentimise andmed failis `dbcionfig.java`.
 
-### Käivitamine
+Testandmed suvaliselt genereeritud GPT-ga.
 
-```
-java -jar test.jar
-```
+### Käivitaminejava -jar test.jar
 
 Kui see ei tööta kasutada [Mavenit](https://maven.apache.org/).
 
