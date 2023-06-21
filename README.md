@@ -30,7 +30,9 @@ Lõpptulemus:
 
 ## Lahendus
 
-Json formaat `{id=1, nimi=test, salajane=test, tel=52310232}`
+Json formaat `{id=1, nimi=test, salajane=test, tel=52310232}`.
+
+Programmifailid kaustas `src/main/java/App`.
 
 http://localhost:8000/api/1 kuvab vastava id-ga kasutaja kohta infot antud json formaadis.
 
@@ -40,11 +42,19 @@ Andmebaasi dump: smit.sql
 
 ### Tarkvara
 
-* [Maven](https://maven.apache.org/)
 * [Java](https://www.java.com/en/) 18
 * [PostgreSQL](https://www.postgresql.org/) andmebaas
 
+### Andmebaas
+
+Aadress ja autentimise andmed failis `dbcionfig.java`.
+
 ### Käivitamine
+
+```
+java -jar test.jar
+```
+Kui see ei tööta kasutada [Mavenit](https://maven.apache.org/).
 
 ```
 mvn compile

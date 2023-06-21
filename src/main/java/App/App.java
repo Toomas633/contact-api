@@ -33,9 +33,9 @@ public class App {
 
         private void handleGetRequest(HttpExchange exchange) throws IOException {
             String userId = exchange.getRequestURI().getPath().split("/api/")[1];
-            String url = "jdbc:postgresql://mysql.toomas633.com:5432/smit";
-            String username = "postgres";
-            String password = "Testing1234";
+            String url = dbconfig.getUrl();
+            String username = dbconfig.getUsername();
+            String password = dbconfig.getPassword();
             try (Connection connection = DriverManager.getConnection(url, username, password)) {
                 String selectQuery = "SELECT * FROM kontaktid WHERE id = ?";
                 try (PreparedStatement statement = connection.prepareStatement(selectQuery)) {
@@ -86,9 +86,9 @@ public class App {
                     tel = value;
                 }
             }
-            String url = "jdbc:postgresql://mysql.toomas633.com:5432/smit";
-            String username = "postgres";
-            String password = "Testing1234";
+            String url = dbconfig.getUrl();
+            String username = dbconfig.getUsername();
+            String password = dbconfig.getPassword();
             try (Connection connection = DriverManager.getConnection(url, username, password)) {
                 String insertQuery = "";
                 if (id.equals(0)) {
