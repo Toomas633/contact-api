@@ -12,26 +12,27 @@ import java.sql.SQLException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
 public class Handler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        String requestUri = exchange.getRequestURI().toString();
-        if (requestUri.contains("/get/") && exchange.getRequestMethod().equals("GET")) {
+        String requestUri = exchange.getRequestURI().toString().trim();
+        if (requestUri.contains("?get=")) {
             GetContact(exchange);
-        } else if (requestUri.contains("/add/") && exchange.getRequestMethod().equals("POST")) {
+        } else if (requestUri.equals("/add")) {
             AddContact(exchange);
-        } else if (requestUri.contains("/search/") && exchange.getRequestMethod().equals("GET")) {
+        } else if (requestUri.equals("/search")) {
             Search(exchange);
         } else {
-            sendResponse(exchange, 500, "Vale url");
+            sendResponse(exchange, 500, "Vale url " + requestUri);
         }
     }
 
     private void GetContact(HttpExchange exchange) throws IOException {
-        String userId = exchange.getRequestURI().getPath().split("/api/contact/")[1];
+        String userId = exchange.getRequestURI().getPath().split("?get=")[1];
         String url = DB.getUrl();
         String username = DB.getUsername();
         String password = DB.getPassword();
@@ -150,7 +151,11 @@ public class Handler implements HttpHandler {
     }
 
     private void sendResponse(HttpExchange exchange, int statusCode, String response) throws IOException {
-        exchange.getResponseHeaders().set("Content-Type", "text/plain; charset=UTF-8");
+        Headers headers = exchange.getResponseHeaders();
+        headers.add("Access-Control-Allow-Origin", "*");
+        headers.add("Content-Type", "text/plain; charset=UTF-8");
+        headers.add("Content-Type", "application/json; charset=UTF-8");
+        headers.add("Access-Control-Allow-Methods", "GET, POST");
         exchange.sendResponseHeaders(statusCode, response.getBytes(StandardCharsets.UTF_8).length);
         OutputStream outputStream = exchange.getResponseBody();
         outputStream.write(response.getBytes(StandardCharsets.UTF_8));

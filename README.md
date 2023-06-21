@@ -36,15 +36,15 @@ Otsingul tagastatakse array `[{"nimi":"Mart Laanemäe","salajane":"Kivimurdja","
 
 Programmifailid kaustas `src/main/java/App`.
 
-http://localhost:8000/get/1 kuvab vastava id-ga kontakti kohta infot antud json formaadis.
+http://localhost:8000/?get=1 kuvab vastava id-ga kontakti kohta infot antud json formaadis.
 
-http://localhost:8000/add/{id=1, nimi=test, salajane=test, tel=52310232} salvestab selle info andmebaasi.
+http://localhost:8000/add salvestab selle info andmebaasi kui payload on antud kasutaja json {id=1, nimi=test, salajane=test, tel=52310232}.
 
-http://localhost:8000/search/väärtus otsib anmebaasi lahtritest vastavat väärtust.
+http://localhost:8000/search otsib anmebaasi lahtritest vastavat väärtust kui request payload on search:väärtus .
 
 Andmebaasi dump: `smit.sql`
 
-Ajakulu ~10h.
+Ajakulu ~12h.
 
 ### Tarkvara
 

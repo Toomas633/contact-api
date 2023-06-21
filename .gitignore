@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/java,maven
-# Edit at https://www.toptal.com/developers/gitignore?templates=java,maven
+# Created by https://www.toptal.com/developers/gitignore/api/java,react,maven
+# Edit at https://www.toptal.com/developers/gitignore?templates=java,react,maven
 
 ### Java ###
 # Compiled class file
@@ -45,5 +45,20 @@ buildNumber.properties
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
-org/*
-# End of https://www.toptal.com/developers/gitignore/api/java,maven
+
+### react ###
+.DS_*
+logs
+**/*.backup.*
+**/*.back.*
+
+node_modules
+bower_components
+
+*.sublime*
+
+psd
+thumb
+sketch
+
+# End of https://www.toptal.com/developers/gitignore/api/java,react,maven
