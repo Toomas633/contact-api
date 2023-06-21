@@ -2,13 +2,13 @@ package App;
 
 import org.json.JSONObject;
 
-public class Kasutaja {
+public class Contact {
     private int id;
     private String nimi;
     private String salajane;
     private String tel;
 
-    public Kasutaja(int id, String nimi, String salajane, String tel) {
+    public Contact(int id, String nimi, String salajane, String tel) {
         this.id = id;
         this.nimi = nimi;
         this.salajane = salajane;

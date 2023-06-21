@@ -37,7 +37,7 @@ public class ApiHandler implements HttpHandler {
                         String nimi = resultSet.getString("nimi");
                         String salajane = resultSet.getString("salajane");
                         String tel = resultSet.getString("tel");
-                        Kasutaja user = new Kasutaja(id, nimi, salajane, tel);
+                        Contact user = new Contact(id, nimi, salajane, tel);
                         String response = user.toJSON().toString();
                         sendResponse(exchange, 200, response);
                     } else {

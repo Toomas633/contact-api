@@ -18,19 +18,21 @@ Tehnilised nõuded:
 
 - [X] Infosüsteemil peab olema REST API, mis toetab JSON andmeformaati, et lahendust saaks liidestada teiste süsteemidega.
 - [X] Back-end tehnoloogia soovituslikult Java.
-- [ ] JavaScript kasutajaliides, mis suhtleb infosüsteemi REST API'ga kirjete lisamisel ja kuvamisel (ei pea mõtlema disaini või kujunduse peale).Võib kasutada ka oma valitud JavaScript raamistiku
+- [X] JavaScript kasutajaliides, mis suhtleb infosüsteemi REST API'ga kirjete lisamisel ja kuvamisel (ei pea mõtlema disaini või kujunduse peale).Võib kasutada ka oma valitud JavaScript raamistiku
 - [X] Lahendus peab toetama kõikvõimalike sümbolitega kontaktide nimesid.
 - [X] Süsteemi kasutajad ja kontaktandmed on talletatud andmebaasis PostgreSQL.
 - [X] Boonus: Kasutaja saab otsida kontakte
 
 Lõpptulemus:
 
-- [ ] Tarkvara kood ja andmebaasi mudel (näiteks SQL dump) edastada failina.
+- [X] Tarkvara kood ja andmebaasi mudel (näiteks SQL dump) edastada failina.
 - [X] Juhend kuidas tarkvara käivitada
 
 ## Lahendus
 
-Json formaat `{"id":10,"nimi":"Test","salajane":"Test","tel":"9812432"}`.
+Json formaat saatmiseks ja vastusena andmebaasist `{"id":10,"nimi":"Test","salajane":"Test","tel":"9812432"}`.
+
+Otsingul tagastatakse array `[{"nimi":"Mart Laanemäe","salajane":"Kivimurdja","tel":"55512345","id":1},{"nimi":"Liis Saar","salajane":"Metslind","tel":"+372 55567890","id":2},{"nimi":"Jaanika Tamm","salajane":"Salurüütel","tel":"+372 55524680","id":3},{"nimi":"Peeter Vaher","salajane":"Öökull","tel":"55510101","id":4},{"nimi":"Mari-Liis Kask","salajane":"Sinitihane","tel":"55588899","id":5},{"nimi":"Märten Põldmäe","salajane":"Virmalaine","tel":"+37255598765","id":54}]`.
 
 Programmifailid kaustas `src/main/java/App`.
 
@@ -40,7 +42,7 @@ http://localhost:800/api/{id=1, nimi=test, salajane=test, tel=52310232} salvesta
 
 Andmebaasi dump: `smit.sql`
 
-Ajakulu ~8h.
+Ajakulu ~10h.
 
 ### Tarkvara
 
@@ -53,9 +55,12 @@ Aadress ja autentimise andmed failis `DB.java`.
 
 Testandmed suvaliselt genereeritud GPT-ga.
 
-### Käivitaminejava -jar test.jar
+### Käivitamine
 
-Kui see ei tööta kasutada [Mavenit](https://maven.apache.org/).
+käivitada programm kasutades `java -jar test.jar`.
+Liikuda lehele [http:localhost:8000](http:localhost:8000).
+
+Kui .jar ei tööta kasutada [Mavenit](https://maven.apache.org/).
 
 ```
 mvn clean install

@@ -16,37 +16,58 @@ import com.sun.net.httpserver.HttpHandler;
 public class SearchHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
+        String requestUri = exchange.getRequestURI().toString();
         if (exchange.getRequestMethod().equals("POST")) {
-            String requestUri = exchange.getRequestURI().toString();
             if (requestUri.contains("/?search=")) {
                 Search(exchange);
             }
         } else {
             String response = "";
-            try {
-                InputStream fileInputStream = getClass().getResourceAsStream("/static/search.html");
-                byte[] buffer = new byte[fileInputStream.available()];
-                fileInputStream.read(buffer);
-                fileInputStream.close();
-                exchange.getResponseHeaders().set("Content-Type", "text/html");
-                exchange.sendResponseHeaders(200, buffer.length);
-                OutputStream outputStream = exchange.getResponseBody();
-                outputStream.write(buffer);
-                outputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-                response = "Internal Server Error";
-                exchange.sendResponseHeaders(500, response.length());
-                OutputStream outputStream = exchange.getResponseBody();
-                outputStream.write(response.getBytes());
-                outputStream.close();
+            if (requestUri.contains("/?contact=")) {
+                try {
+                    InputStream fileInputStream = getClass().getResourceAsStream("/static/contact.html");
+                    byte[] buffer = new byte[fileInputStream.available()];
+                    fileInputStream.read(buffer);
+                    fileInputStream.close();
+                    exchange.getResponseHeaders().set("Content-Type", "text/html");
+                    exchange.sendResponseHeaders(200, buffer.length);
+                    OutputStream outputStream = exchange.getResponseBody();
+                    outputStream.write(buffer);
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    response = "Internal Server Error";
+                    exchange.sendResponseHeaders(500, response.length());
+                    OutputStream outputStream = exchange.getResponseBody();
+                    outputStream.write(response.getBytes());
+                    outputStream.close();
+                }
+            } else {
+                try {
+                    InputStream fileInputStream = getClass().getResourceAsStream("/static/search.html");
+                    byte[] buffer = new byte[fileInputStream.available()];
+                    fileInputStream.read(buffer);
+                    fileInputStream.close();
+                    exchange.getResponseHeaders().set("Content-Type", "text/html");
+                    exchange.sendResponseHeaders(200, buffer.length);
+                    OutputStream outputStream = exchange.getResponseBody();
+                    outputStream.write(buffer);
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    response = "Internal Server Error";
+                    exchange.sendResponseHeaders(500, response.length());
+                    OutputStream outputStream = exchange.getResponseBody();
+                    outputStream.write(response.getBytes());
+                    outputStream.close();
+                }
             }
         }
     }
 
     private void Search(HttpExchange exchange) throws IOException {
         String requestBody = new String(exchange.getRequestBody().readAllBytes());
-        String input = requestBody.substring(requestBody.indexOf('/') + 1);
+        String input = requestBody.substring(requestBody.indexOf(':') + 1);
         String url = DB.getUrl();
         String username = DB.getUsername();
         String password = DB.getPassword();
@@ -63,9 +84,8 @@ public class SearchHandler implements HttpHandler {
                         String nimi = resultSet.getString("nimi");
                         String salajane = resultSet.getString("salajane");
                         String tel = resultSet.getString("tel");
-                        Kasutaja user = new Kasutaja(id, nimi, salajane, tel);
+                        Contact user = new Contact(id, nimi, salajane, tel);
                         response.put(user.toJSON());
-                        System.out.println(resultSet);
                     }
                     sendResponse(exchange, 200, response.toString());
                 }
