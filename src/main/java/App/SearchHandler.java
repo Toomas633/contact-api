@@ -9,7 +9,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import org.json.JSONArray;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -46,7 +46,7 @@ public class SearchHandler implements HttpHandler {
 
     private void Search(HttpExchange exchange) throws IOException {
         String requestBody = new String(exchange.getRequestBody().readAllBytes());
-        String input = requestBody.substring(requestBody.indexOf('/')+1);
+        String input = requestBody.substring(requestBody.indexOf('/') + 1);
         String url = DB.getUrl();
         String username = DB.getUsername();
         String password = DB.getPassword();
@@ -57,18 +57,17 @@ public class SearchHandler implements HttpHandler {
                 statement.setString(2, "%" + input + "%");
                 statement.setString(3, "%" + input + "%");
                 try (ResultSet resultSet = statement.executeQuery()) {
-                    String response = "{";
+                    JSONArray response = new JSONArray();
                     while (resultSet.next()) {
-                        response = response + resultSet.toString() + ", ";
                         int id = resultSet.getInt("id");
                         String nimi = resultSet.getString("nimi");
                         String salajane = resultSet.getString("salajane");
                         String tel = resultSet.getString("tel");
                         Kasutaja user = new Kasutaja(id, nimi, salajane, tel);
-                        user.toString();
+                        response.put(user.toJSON());
                         System.out.println(resultSet);
-                        sendResponse(exchange, 200, response);
-                    } 
+                    }
+                    sendResponse(exchange, 200, response.toString());
                 }
             }
             connection.close();

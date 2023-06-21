@@ -14,14 +14,13 @@ public class Kasutaja {
         this.salajane = salajane;
         this.tel = tel;
     }
-
-    @Override
-    public String toString() {
+    
+    public JSONObject toJSON() {
         JSONObject json = new JSONObject();
         json.put("id", id);
         json.put("nimi", nimi);
         json.put("salajane", salajane);
         json.put("tel", tel);
-        return json.toString();
+        return json;
     }
 }
