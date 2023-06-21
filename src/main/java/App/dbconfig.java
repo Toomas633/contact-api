@@ -6,7 +6,7 @@ public class dbconfig {
     private static String password = "Testing1234";
 
     public static String getUrl() {
-        return url;
+        return url + "?charSet=UTF8&useUnicode=true";
     }
 
     public static String getUsername() {

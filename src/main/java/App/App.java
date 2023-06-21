@@ -1,16 +1,17 @@
 package App;
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
-import com.sun.net.httpserver.HttpServer;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
 
 public class App {
     public static void main(String[] args) throws IOException {
@@ -122,10 +123,10 @@ public class App {
         }
 
         private void sendResponse(HttpExchange exchange, int statusCode, String response) throws IOException {
-            exchange.sendResponseHeaders(statusCode, response.length());
+            exchange.getResponseHeaders().set("Content-Type", "text/plain; charset=UTF-8");
+            exchange.sendResponseHeaders(statusCode, response.getBytes(StandardCharsets.UTF_8).length);
             OutputStream outputStream = exchange.getResponseBody();
-            outputStream.write(response.getBytes());
-            outputStream.flush();
+            outputStream.write(response.getBytes(StandardCharsets.UTF_8));
             outputStream.close();
         }
     }
@@ -145,7 +146,7 @@ public class App {
 
         @Override
         public String toString() {
-            return "User{id=" + id + ", nimi=" + name + ", salajane=" + secret + ", tel=" + tel +'}';
+            return "{id=" + id + ", nimi=" + name + ", salajane=" + secret + ", tel=" + tel +'}';
         }
     }
 }

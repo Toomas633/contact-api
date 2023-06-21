@@ -38,7 +38,9 @@ http://localhost:8000/api/1 kuvab vastava id-ga kasutaja kohta infot antud json 
 
 http://localhost:800/api/{id=1, nimi=test, salajane=test, tel=52310232} salvestab selle info andmebaasi.
 
-Andmebaasi dump: smit.sql
+Andmebaasi dump: `smit.sql`
+
+Ajakulu ~4h.
 
 ### Tarkvara
 
@@ -54,6 +56,7 @@ Aadress ja autentimise andmed failis `dbcionfig.java`.
 ```
 java -jar test.jar
 ```
+
 Kui see ei tööta kasutada [Mavenit](https://maven.apache.org/).
 
 ```
