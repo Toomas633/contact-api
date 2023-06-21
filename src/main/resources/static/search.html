@@ -59,7 +59,7 @@
           let searchInput = document.getElementById("search-input").value;
           if (!(searchInput.length < 1)) {
             let url =
-              "http://localhost:8000/?search=" +
+              "http://localhost:8000/search/" +
               encodeURIComponent(searchInput);
             fetch(url, {
               method: "POST",
@@ -84,7 +84,7 @@
                     <p>Tel: ${tel}</p>
                     `;
                     div.addEventListener("click", () => {
-                      window.location.href = `http://localhost:8000/?contact=${id}`;
+                      window.location.href = `http://localhost:8001/contact/${id}`;
                     });
                     resultsContainer.appendChild(div);
                   });

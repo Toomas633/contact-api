@@ -36,9 +36,11 @@ Otsingul tagastatakse array `[{"nimi":"Mart Laanemäe","salajane":"Kivimurdja","
 
 Programmifailid kaustas `src/main/java/App`.
 
-http://localhost:8000/api/1 kuvab vastava id-ga kasutaja kohta infot antud json formaadis.
+http://localhost:8000/get/1 kuvab vastava id-ga kontakti kohta infot antud json formaadis.
 
-http://localhost:800/api/{id=1, nimi=test, salajane=test, tel=52310232} salvestab selle info andmebaasi.
+http://localhost:8000/add/{id=1, nimi=test, salajane=test, tel=52310232} salvestab selle info andmebaasi.
+
+http://localhost:8000/search/väärtus otsib anmebaasi lahtritest vastavat väärtust.
 
 Andmebaasi dump: `smit.sql`
 
@@ -57,10 +59,9 @@ Testandmed suvaliselt genereeritud GPT-ga.
 
 ### Käivitamine
 
-käivitada programm kasutades `java -jar test.jar`.
-Liikuda lehele [http:localhost:8000](http:localhost:8000).
+Käivitada programm kasutades `java -jar test.jar` alustab tööd api endpoint [http:localhost:8000](http://localhost:8000/).
 
-Kui .jar ei tööta kasutada [Mavenit](https://maven.apache.org/).
+Kui .jar ei tööta kasutada [Mavenit](https://maven.apache.org/) või otse App.java faili.
 
 ```
 mvn clean install
