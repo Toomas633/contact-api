@@ -36,7 +36,7 @@ Otsingul tagastatakse array `[{"nimi":"Mart Laanemäe","salajane":"Kivimurdja","
 
 Programmifailid kaustas `src/main/java/App`.
 
-http://localhost:8000/?get=1 kuvab vastava id-ga kontakti kohta infot antud json formaadis.
+http://localhost:8000/get kuvab vastava id-ga kontakti kohta infot antud json formaadis. Payload on id:väärtus.
 
 http://localhost:8000/add salvestab selle info andmebaasi kui payload on antud kasutaja json {id=1, nimi=test, salajane=test, tel=52310232}.
 
