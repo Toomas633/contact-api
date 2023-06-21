@@ -48,8 +48,9 @@ Ajakulu ~10h.
 
 ### Tarkvara
 
-* [Java](https://www.java.com/en/) 18
+* [Java](https://www.java.com/en/) (18)
 * [PostgreSQL](https://www.postgresql.org/) andmebaas
+* [Node.js](https://nodejs.org/en)
 
 ### Andmebaas
 
