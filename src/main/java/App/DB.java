@@ -1,6 +1,6 @@
 package App;
 
-public class dbconfig {
+public class DB {
     private static String url = "jdbc:postgresql://mysql.toomas633.com:5432/smit";
     private static String username = "postgres";
     private static String password = "Testing1234";

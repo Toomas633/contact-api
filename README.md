@@ -21,7 +21,7 @@ Tehnilised nõuded:
 - [ ] JavaScript kasutajaliides, mis suhtleb infosüsteemi REST API'ga kirjete lisamisel ja kuvamisel (ei pea mõtlema disaini või kujunduse peale).Võib kasutada ka oma valitud JavaScript raamistiku
 - [X] Lahendus peab toetama kõikvõimalike sümbolitega kontaktide nimesid.
 - [X] Süsteemi kasutajad ja kontaktandmed on talletatud andmebaasis PostgreSQL.
-- [ ] Boonus: Kasutaja saab otsida kontakte
+- [X] Boonus: Kasutaja saab otsida kontakte
 
 Lõpptulemus:
 
@@ -30,7 +30,7 @@ Lõpptulemus:
 
 ## Lahendus
 
-Json formaat `{id=1, nimi=test, salajane=test, tel=52310232}`.
+Json formaat `{"id":10,"nimi":"Test","salajane":"Test","tel":"9812432"}`.
 
 Programmifailid kaustas `src/main/java/App`.
 
@@ -40,7 +40,7 @@ http://localhost:800/api/{id=1, nimi=test, salajane=test, tel=52310232} salvesta
 
 Andmebaasi dump: `smit.sql`
 
-Ajakulu ~5h.
+Ajakulu ~8h.
 
 ### Tarkvara
 
@@ -49,7 +49,7 @@ Ajakulu ~5h.
 
 ### Andmebaas
 
-Aadress ja autentimise andmed failis `dbcionfig.java`.
+Aadress ja autentimise andmed failis `DB.java`.
 
 Testandmed suvaliselt genereeritud GPT-ga.
 
@@ -58,11 +58,7 @@ Testandmed suvaliselt genereeritud GPT-ga.
 Kui see ei tööta kasutada [Mavenit](https://maven.apache.org/).
 
 ```
-mvn compile
-```
-
-```
-mvn package
+mvn clean install
 ```
 
 ```
