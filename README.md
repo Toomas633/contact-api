@@ -30,11 +30,10 @@ Lõpptulemus:
 
 ## Lahendus
 
-Json formaat saatmiseks ja vastusena andmebaasist `{"id":10,"nimi":"Test","salajane":"Test","tel":"9812432"}`.
+Json formaat saatmiseks ja vastusena andmebaasist `{"id":10,"nimi":"Test","salajane":"Test","tel":"9812432"}` (otsingul tagastatakse array).
 
-Otsingul tagastatakse array `[{"nimi":"Mart Laanemäe","salajane":"Kivimurdja","tel":"55512345","id":1},{"nimi":"Liis Saar","salajane":"Metslind","tel":"+372 55567890","id":2},{"nimi":"Jaanika Tamm","salajane":"Salurüütel","tel":"+372 55524680","id":3},{"nimi":"Peeter Vaher","salajane":"Öökull","tel":"55510101","id":4},{"nimi":"Mari-Liis Kask","salajane":"Sinitihane","tel":"55588899","id":5},{"nimi":"Märten Põldmäe","salajane":"Virmalaine","tel":"+37255598765","id":54}]`.
-
-Programmifailid kaustas `src/main/java/App`.
+Java programmifailid kaustas `src/main/java/App`.
+React veebilehe failid kaustas `src/`.
 
 http://localhost:8000/get kuvab vastava id-ga kontakti kohta infot antud json formaadis. Payload on id:väärtus.
 
