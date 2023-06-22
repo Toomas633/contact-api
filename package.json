@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "[- Tarkvara](#tarkvara)\r [- Käivitamine](#käivitamine)",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "npm run test",
     "start": "react-scripts start",
@@ -22,5 +21,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router": "^6.13.0",
+    "react-router-dom": "^5.3.4",
+    "react-scripts": "^5.0.1"
+  },
+  "devDependencies": {}
 }

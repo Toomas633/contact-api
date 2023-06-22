@@ -1,0 +1,90 @@
+body {
+  display: block;
+  background-color: #f2f2f2;
+}
+.navbar {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50px;
+  width: 100%;
+  background-color: lightgray;
+}
+
+.väljad {
+  position: absolute;
+  top: 50px;
+  display: block;
+  align-items: center;
+  background-color: #f2f2f2;
+  width: 100%;
+  height: calc(100% - 50px);
+}
+
+.sisend {
+  display: block;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 5px;
+  width: 100%;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.sisend input[type="text"] {
+  width: 450px;
+  height: 25px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.sisend p {
+    font-size: 18px;
+    margin: 0px;
+}
+
+.save {
+  padding: 10px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: blue;
+  color: transparent;
+  text-shadow: 0 0 0 #fff;
+  cursor: pointer;
+}
+
+.back {
+  margin: 6px;
+  padding: 10px 25px;
+  border-radius: 10px;
+  background-color: blue;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.popup {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.success {
+  background-color: lightgreen;
+  color: black;
+}
+
+.error {
+  background-color: red;
+  color: white;
+}

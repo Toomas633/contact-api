@@ -12,7 +12,7 @@ Kliendi nõuded:
 - [X] Näeb kontaktide kirjeid.
 - [X] Saab lisada uusi kontakti kirjeid.
 - [X] Kontakti kirjes talletatakse kontakti pärisnimi, salajane kood-nimi ja telefoninumber.
-- [ ] Lahendust saab kasutada läbi veebibrauseri.
+- [X] Lahendust saab kasutada läbi veebibrauseri.
 
 Tehnilised nõuded:
 
@@ -42,9 +42,11 @@ http://localhost:8000/add salvestab selle info andmebaasi kui payload on antud k
 
 http://localhost:8000/search otsib anmebaasi lahtritest vastavat väärtust kui request payload on search:väärtus .
 
+http://localhost:8000/delete otsib anmebaasi lahtritest vastavat väärtust kui request payload on id:väärtus .
+
 Andmebaasi dump: `smit.sql`
 
-Ajakulu ~12h.
+Ajakulu ~15h.
 
 ### Tarkvara
 
@@ -61,6 +63,11 @@ Testandmed suvaliselt genereeritud GPT-ga.
 ### Käivitamine
 
 Käivitada programm kasutades `java -jar test.jar` alustab tööd api endpoint [http:localhost:8000](http://localhost:8000/).
+
+Veebileht:
+`npm install -g serve`
+`serve -s build`
+Aadressil [http://localhost:3000](http://localhost:3000)
 
 Kui .jar ei tööta kasutada [Mavenit](https://maven.apache.org/) või otse App.java faili.
 
