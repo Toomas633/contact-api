@@ -1,7 +1,12 @@
 # SMIT-proovitöö
 
-[- Tarkvara](#tarkvara)
-[- Käivitamine](#käivitamine)
+- [Ülesanne](#ülesanne)
+- [Lahendus](#lahendus)
+  - [Tarkvara](#tarkvara)
+  - [Andmebaas](#andmebaas)
+  - [Käivitamine](#käivitamine)
+
+### Ülesanne
 
 Sinu kliendil, kes tegeleb salajaste kontaktide haldamisega, on probleem. Tal on vaja kiires korras selle tarbeks minimalistlikku infosüsteemi. Arutades võimalikku lahendust üheskoos kliendi ja arhitektiga olete ühel meelel, et see lahendus ei saa olema pikaaegne vaid pigem ajutine, minimaalseid nõudeid täitev.
 
@@ -30,6 +35,10 @@ Lõpptulemus:
 
 ## Lahendus
 
+Ajakulu ~15h.
+
+### Json
+
 Json formaat saatmiseks ja vastusena andmebaasist `{"id":10,"nimi":"Test","salajane":"Test","tel":"9812432"}` (otsingul tagastatakse array).
 
 Java programmifailid kaustas `src/main/java/App`.
@@ -43,10 +52,6 @@ http://localhost:8000/search otsib anmebaasi lahtritest vastavat väärtust kui 
 
 http://localhost:8000/delete otsib anmebaasi lahtritest vastavat väärtust kui request payload on id:väärtus .
 
-Andmebaasi dump: `smit.sql`
-
-Ajakulu ~15h.
-
 ### Tarkvara
 
 * [Java](https://www.java.com/en/) (18)
@@ -54,6 +59,8 @@ Ajakulu ~15h.
 * [Node.js](https://nodejs.org/en)
 
 ### Andmebaas
+
+Andmebaasi dump: `smit.sql`
 
 Aadress ja autentimise andmed failis `DB.java`.
 
