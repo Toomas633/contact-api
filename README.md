@@ -1,81 +1,73 @@
-# SMIT-proovitöö
+# Contact API
 
-- [Ülesanne](#ülesanne)
-- [Lahendus](#lahendus)
-  - [Tarkvara](#tarkvara)
-  - [Andmebaas](#andmebaas)
-  - [Käivitamine](#käivitamine)
+- [Requirements](#requirements)
+- [Solution](#solution)
+  - [Software](#software)
+  - [Database](#database)
+  - [Running](#running)
 
-### Ülesanne
+### Requirements
 
-Sinu kliendil, kes tegeleb salajaste kontaktide haldamisega, on probleem. Tal on vaja kiires korras selle tarbeks minimalistlikku infosüsteemi. Arutades võimalikku lahendust üheskoos kliendi ja arhitektiga olete ühel meelel, et see lahendus ei saa olema pikaaegne vaid pigem ajutine, minimaalseid nõudeid täitev.
+Your client, who deals with managing secret contacts, has a problem. They urgently need a minimalist information system for this purpose. In discussions with the client and the architect, you all agree that this solution will not be long-term, but rather temporary, fulfilling only the minimal requirements.
 
-Lepitakse kokku järgnevas:
+The following is agreed:
 
-Kliendi nõuded:
+- Client’s requirements:
+- Can view contact records.
+- Can add new contact records.
+- A contact record stores the contact’s real name, secret code name, and phone number.
+- The solution can be used through a web browser.
 
-- [X] Näeb kontaktide kirjeid.
-- [X] Saab lisada uusi kontakti kirjeid.
-- [X] Kontakti kirjes talletatakse kontakti pärisnimi, salajane kood-nimi ja telefoninumber.
-- [X] Lahendust saab kasutada läbi veebibrauseri.
+Technical requirements:
+- The information system must have a REST API that supports the JSON data format so that the solution can be integrated with other systems.
+- Back-end technology is preferably Java.
+- A JavaScript user interface that communicates with the system’s REST API for adding and displaying records (no need to think about design or styling). A JavaScript framework of your choice may also be used.
+- The solution must support contact names containing any possible symbols.
+- System users and contact data are stored in a PostgreSQL database.
+- Bonus: The user can search for contacts.
 
-Tehnilised nõuded:
+Final deliverable:
+- The software code and the database model (for example, an SQL dump) must be delivered as a file.
+- Instructions on how to run the software.
 
-- [X] Infosüsteemil peab olema REST API, mis toetab JSON andmeformaati, et lahendust saaks liidestada teiste süsteemidega.
-- [X] Back-end tehnoloogia soovituslikult Java.
-- [X] JavaScript kasutajaliides, mis suhtleb infosüsteemi REST API'ga kirjete lisamisel ja kuvamisel (ei pea mõtlema disaini või kujunduse peale).Võib kasutada ka oma valitud JavaScript raamistiku
-- [X] Lahendus peab toetama kõikvõimalike sümbolitega kontaktide nimesid.
-- [X] Süsteemi kasutajad ja kontaktandmed on talletatud andmebaasis PostgreSQL.
-- [X] Boonus: Kasutaja saab otsida kontakte
+## Solution
+### JSON
 
-Lõpptulemus:
+JSON format for sending and receiving data: `{"id":10,"nimi":"Test","salajane":"Test","tel":"9812432"}` (When searching, an array is returned).
 
-- [X] Tarkvara kood ja andmebaasi mudel (näiteks SQL dump) edastada failina.
-- [X] Juhend kuidas tarkvara käivitada
+Java program files under `src/main/java/App`.
+React website in `src/`.
 
-## Lahendus
+http://localhost:8000/get displays information about the contact with the given ID in JSON format. Payload: `id:value`.
 
-Ajakulu ~15h.
+http://localhost:8000/add saves the information to the database when the payload is a user JSON object, e.g. `{id=1, nimi=test, salajane=test, tel=52310232}`.
 
-### Json
+http://localhost:8000/search searches the database fields for the given value when the request payload is `search:value`.
 
-Json formaat saatmiseks ja vastusena andmebaasist `{"id":10,"nimi":"Test","salajane":"Test","tel":"9812432"}` (otsingul tagastatakse array).
+http://localhost:8000/delete deletes the contact with the given ID when the request payload is `id:value`.
 
-Java programmifailid kaustas `src/main/java/App`.
-React veebilehe failid kaustas `src/`.
-
-http://localhost:8000/get kuvab vastava id-ga kontakti kohta infot antud json formaadis. Payload on id:väärtus.
-
-http://localhost:8000/add salvestab selle info andmebaasi kui payload on antud kasutaja json {id=1, nimi=test, salajane=test, tel=52310232}.
-
-http://localhost:8000/search otsib anmebaasi lahtritest vastavat väärtust kui request payload on search:väärtus .
-
-http://localhost:8000/delete otsib anmebaasi lahtritest vastavat väärtust kui request payload on id:väärtus .
-
-### Tarkvara
+### Software
 
 * [Java](https://www.java.com/en/) (18)
-* [PostgreSQL](https://www.postgresql.org/) andmebaas
+* [PostgreSQL](https://www.postgresql.org/)
 * [Node.js](https://nodejs.org/en)
 
-### Andmebaas
+### Database
 
-Andmebaasi dump: `smit.sql`
+- Database dump: `smit.sql`
+- Database configuration in file `DB.java`.
+- Test data is randomly generated with ChatGPT.
 
-Aadress ja autentimise andmed failis `DB.java`.
+### Running
 
-Testandmed suvaliselt genereeritud GPT-ga.
+Run the program using `java -jar test.jar` and the API is exposed on [http:localhost:8000](http://localhost:8000/).
 
-### Käivitamine
-
-Käivitada programm kasutades `java -jar test.jar` alustab tööd api endpoint [http:localhost:8000](http://localhost:8000/).
-
-Veebileht:
+Webpage:
 `npm install -g serve`
 `serve -s build`
-Aadressil [http://localhost:3000](http://localhost:3000)
+At address [http://localhost:3000](http://localhost:3000)
 
-Kui .jar ei tööta kasutada [Mavenit](https://maven.apache.org/) või otse App.java faili.
+If .jar is not working you can also use [Maven](https://maven.apache.org/) or run the `App.java` file directly.
 
 ```
 mvn clean install
